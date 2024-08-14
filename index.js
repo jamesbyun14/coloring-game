@@ -1,14 +1,8 @@
-// 캔버스 가져오고, resize 해결하기
+// 캔버스 가져오기
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
-addEventListener("resize", () => {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  gameTimer = 0;
-  init();
-});
 
 // 'Circle' 클래스 만들기
 class Circle {
@@ -193,7 +187,7 @@ init = () => {
           : Math.round(Math.random()) == 1
           ? 10
           : -10,
-        20,
+        Math.random() * 21 + 4,
         deco == 0
           ? "white"
           : Math.round(Math.random()) == 1
