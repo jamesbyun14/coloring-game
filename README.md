@@ -9,6 +9,8 @@ If you press space(red) or Enter(blue) you can teleport to the middle spot if yo
 So! Go to and enjoy!
 
 
+
+
 # 색칠하기 게임
 원을 색칠해서 점수를 얻으세요!
 
