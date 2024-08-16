@@ -24,6 +24,7 @@ class Circle {
     ctx.stroke();
     ctx.closePath();
   }
+
   update() {
     this.draw();
     if (this.deco < 1) {
@@ -64,13 +65,15 @@ countNums = () => {
   let blues = 0;
   let reds = 0;
   circleArray.forEach((circle) => {
-    switch (circle.color) {
-      case "#FFA07A":
-        reds += 1;
-        break;
-      case "#87CEEB":
-        blues += 1;
-        break;
+    if (circle.deco !== 1) {
+      switch (circle.color) {
+        case "#FFA07A":
+          reds += 1;
+          break;
+        case "#87CEEB":
+          blues += 1;
+          break;
+      }
     }
   });
   return { redN: reds, blueN: blues };
@@ -204,10 +207,11 @@ init = () => {
 let gameTimer = 0;
 const endTime = 3000;
 let animationId;
-//let winner = "blue";
+
 animate = () => {
   animationId = requestAnimationFrame(animate);
   gameTimer += 1;
+
   if (gameTimer >= endTime) {
     setTimeout(() => {
       ctx.fillStyle = `rgba(255,255,255,0.5)`;
@@ -243,6 +247,18 @@ animate = () => {
     cancelAnimationFrame(animationId);
   }
   ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+  console.log(countNums());
+  if (countNums().redN === countNums().blueN) {
+    ctx.fillStyle = "purple";
+  } else if (countNums().redN > countNums().blueN) {
+    ctx.fillStyle = "red";
+  } else {
+    ctx.fillStyle = "blue";
+  }
+
+  ctx.font = "bold 20px solid";
+  ctx.fillText(`Score :  ${countNums().redN} : ${countNums().blueN}`, 20, 50);
 
   for (let index = circleArray.length - 1; index >= 0; index--) {
     let circle = circleArray[index];
